@@ -33,46 +33,58 @@ export const useUserRole = (): UseUserRoleReturn => {
 
     try {
       // Fetch user role
-      const { data: roleData } = await supabase
+      const { data: roleData, error: roleError } = await supabase
         .from("user_roles")
         .select("role")
         .eq("user_id", user.id)
         .maybeSingle();
 
-      if (roleData) {
-        setRole(roleData.role as AppRole);
+      if (roleError) {
+        console.error("Error fetching role:", roleError);
+        setLoading(false);
+        return;
       }
 
-      // Check application status based on role
-      if (roleData?.role === "freelancer") {
-        const { data: appData } = await supabase
-          .from("freelancer_applications")
-          .select("status")
-          .eq("user_id", user.id)
-          .maybeSingle();
-        
-        setStatus(appData?.status as UserStatus || null);
+      if (roleData) {
+        const userRole = roleData.role as AppRole;
+        setRole(userRole);
 
-        // Check payment status
-        const { data: paymentData } = await supabase
-          .from("freelancer_payments")
-          .select("payment_status")
-          .eq("user_id", user.id)
-          .maybeSingle();
-        
-        setHasPaid(paymentData?.payment_status === "completed");
-      } else if (roleData?.role === "client") {
-        const { data: appData } = await supabase
-          .from("client_applications")
-          .select("status")
-          .eq("user_id", user.id)
-          .maybeSingle();
-        
-        setStatus(appData?.status as UserStatus || null);
-        setHasPaid(true); // Clients don't need to pay
-      } else if (roleData?.role === "admin") {
-        setStatus("approved");
-        setHasPaid(true);
+        // Admin users are always approved with full access
+        if (userRole === "admin") {
+          setStatus("approved");
+          setHasPaid(true);
+          setLoading(false);
+          return;
+        }
+
+        // Check application status based on role
+        if (userRole === "freelancer") {
+          const { data: appData } = await supabase
+            .from("freelancer_applications")
+            .select("status")
+            .eq("user_id", user.id)
+            .maybeSingle();
+          
+          setStatus(appData?.status as UserStatus || null);
+
+          // Check payment status
+          const { data: paymentData } = await supabase
+            .from("freelancer_payments")
+            .select("payment_status")
+            .eq("user_id", user.id)
+            .maybeSingle();
+          
+          setHasPaid(paymentData?.payment_status === "completed");
+        } else if (userRole === "client") {
+          const { data: appData } = await supabase
+            .from("client_applications")
+            .select("status")
+            .eq("user_id", user.id)
+            .maybeSingle();
+          
+          setStatus(appData?.status as UserStatus || null);
+          setHasPaid(true); // Clients don't need to pay
+        }
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
