@@ -17,13 +17,13 @@ const Terms = () => {
 
             <h2 className="mt-8 text-2xl font-semibold text-foreground">1. Acceptance of Terms</h2>
             <p className="text-muted-foreground">
-              By accessing and using cntrlout, you accept and agree to be bound by these Terms and 
+              By accessing and using CnTrL Out, you accept and agree to be bound by these Terms and 
               Conditions. If you do not agree to these terms, please do not use our platform.
             </p>
 
             <h2 className="mt-8 text-2xl font-semibold text-foreground">2. Platform Description</h2>
             <p className="text-muted-foreground">
-              cntrlout is a freelancing ecosystem that connects freelancers with clients. We provide 
+              CnTrL Out is a freelancing ecosystem that connects freelancers with clients. We provide 
               a platform for discovery and connection, but do not act as an intermediary in any 
               transactions between users.
             </p>
@@ -42,7 +42,7 @@ const Terms = () => {
 
             <h2 className="mt-8 text-2xl font-semibold text-foreground">5. No Commissions</h2>
             <p className="text-muted-foreground">
-              cntrlout does not charge any commissions on work completed through the platform. 
+              CnTrL Out does not charge any commissions on work completed through the platform. 
               All negotiations and payments between freelancers and clients are conducted independently.
             </p>
 
@@ -55,7 +55,7 @@ const Terms = () => {
 
             <h2 className="mt-8 text-2xl font-semibold text-foreground">7. Limitation of Liability</h2>
             <p className="text-muted-foreground">
-              cntrlout is provided "as is" without any warranties. We are not responsible for any 
+              CnTrL Out is provided "as is" without any warranties. We are not responsible for any 
               disputes, losses, or damages arising from interactions between users on our platform.
             </p>
 

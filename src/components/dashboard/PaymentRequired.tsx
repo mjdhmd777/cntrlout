@@ -35,7 +35,7 @@ const PaymentRequired = () => {
 
       toast({
         title: "Payment successful!",
-        description: "Welcome to cntrlout. Your lifetime access is now active.",
+        description: "Welcome to CnTrL Out. Your lifetime access is now active.",
       });
 
       await refetch();

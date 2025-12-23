@@ -32,7 +32,7 @@ const Index = () => {
               <span className="text-primary">freelance career</span>
             </h1>
             <p className="mb-10 text-lg text-muted-foreground md:text-xl">
-              cntrlout is a curated freelancing ecosystem where talent meets opportunity 
+              CnTrL Out is a curated freelancing ecosystem where talent meets opportunity 
               without the burden of platform fees. Join a movement of independent professionals.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -65,7 +65,7 @@ const Index = () => {
         <div className="container">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              How cntrlout Works
+              How CnTrL Out Works
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
               A simple, transparent process designed to connect talent with opportunity
@@ -137,7 +137,7 @@ const Index = () => {
         <div className="container">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              Why Choose cntrlout
+              Why Choose CnTrL Out
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
               Built for professionals who value transparency, quality, and independence
