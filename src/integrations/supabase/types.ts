@@ -14,16 +14,259 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admin_logs: {
+        Row: {
+          action: string
+          admin_id: string
+          created_at: string
+          details: Json | null
+          id: string
+          target_user_id: string | null
+        }
+        Insert: {
+          action: string
+          admin_id: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          target_user_id?: string | null
+        }
+        Update: {
+          action?: string
+          admin_id?: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          target_user_id?: string | null
+        }
+        Relationships: []
+      }
+      client_applications: {
+        Row: {
+          company_name: string | null
+          company_website: string | null
+          created_at: string
+          description: string | null
+          email: string
+          full_name: string
+          id: string
+          industry: string | null
+          rejection_reason: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["user_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          company_name?: string | null
+          company_website?: string | null
+          created_at?: string
+          description?: string | null
+          email: string
+          full_name: string
+          id?: string
+          industry?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["user_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          company_name?: string | null
+          company_website?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          industry?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["user_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      freelancer_applications: {
+        Row: {
+          agreed_to_terms: boolean
+          availability: string | null
+          bio: string | null
+          country: string
+          created_at: string
+          email: string
+          experience_level: Database["public"]["Enums"]["experience_level"]
+          full_name: string
+          id: string
+          portfolio_links: string[] | null
+          pricing_preference: Database["public"]["Enums"]["pricing_preference"]
+          primary_skill: string
+          rejection_reason: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          secondary_skills: string[] | null
+          status: Database["public"]["Enums"]["user_status"]
+          timezone: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          agreed_to_terms?: boolean
+          availability?: string | null
+          bio?: string | null
+          country: string
+          created_at?: string
+          email: string
+          experience_level?: Database["public"]["Enums"]["experience_level"]
+          full_name: string
+          id?: string
+          portfolio_links?: string[] | null
+          pricing_preference?: Database["public"]["Enums"]["pricing_preference"]
+          primary_skill: string
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          secondary_skills?: string[] | null
+          status?: Database["public"]["Enums"]["user_status"]
+          timezone: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          agreed_to_terms?: boolean
+          availability?: string | null
+          bio?: string | null
+          country?: string
+          created_at?: string
+          email?: string
+          experience_level?: Database["public"]["Enums"]["experience_level"]
+          full_name?: string
+          id?: string
+          portfolio_links?: string[] | null
+          pricing_preference?: Database["public"]["Enums"]["pricing_preference"]
+          primary_skill?: string
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          secondary_skills?: string[] | null
+          status?: Database["public"]["Enums"]["user_status"]
+          timezone?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      freelancer_payments: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          id: string
+          paid_at: string | null
+          payment_id: string | null
+          payment_method: string | null
+          payment_status: string
+          user_id: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          paid_at?: string | null
+          payment_id?: string | null
+          payment_method?: string | null
+          payment_status?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          paid_at?: string | null
+          payment_id?: string | null
+          payment_method?: string | null
+          payment_status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_role: {
+        Args: { _user_id: string }
+        Returns: Database["public"]["Enums"]["app_role"]
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "freelancer" | "client"
+      experience_level: "entry" | "intermediate" | "expert"
+      pricing_preference: "hourly" | "fixed" | "both"
+      user_status: "pending" | "approved" | "rejected" | "suspended"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +393,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "freelancer", "client"],
+      experience_level: ["entry", "intermediate", "expert"],
+      pricing_preference: ["hourly", "fixed", "both"],
+      user_status: ["pending", "approved", "rejected", "suspended"],
+    },
   },
 } as const
