@@ -21,8 +21,8 @@ const Dashboard = () => {
   }, [user, authLoading, navigate]);
 
   useEffect(() => {
-    // If user has no role/status, redirect to onboarding
-    if (!roleLoading && user && !status && role !== "admin") {
+    // If user has no role/status and is not admin, redirect to onboarding
+    if (!roleLoading && user && role && role !== "admin" && !status) {
       navigate("/onboarding");
     }
   }, [status, role, roleLoading, user, navigate]);
