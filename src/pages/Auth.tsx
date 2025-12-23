@@ -91,22 +91,33 @@ const Auth = () => {
             });
           }
         } else {
+          // Wait a moment for the session to be established
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
           // Get the new user's session
           const { data: { session } } = await supabase.auth.getSession();
           
           if (session?.user) {
             // Create user role
-            await supabase.from("user_roles").insert({
+            const { error: roleError } = await supabase.from("user_roles").insert({
               user_id: session.user.id,
               role: role,
             });
+            
+            if (roleError) {
+              console.error("Error creating role:", roleError);
+            }
 
             // Create profile
-            await supabase.from("profiles").insert({
+            const { error: profileError } = await supabase.from("profiles").insert({
               user_id: session.user.id,
               full_name: "",
               email: email,
             });
+            
+            if (profileError) {
+              console.error("Error creating profile:", profileError);
+            }
           }
 
           toast({
