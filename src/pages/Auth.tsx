@@ -156,7 +156,7 @@ const Auth = () => {
               <CardDescription>
                 {mode === "login"
                   ? "Sign in to access your dashboard"
-                  : "Join the cntrlout community"}
+                  : "Join the CnTrL Out community"}
               </CardDescription>
             </CardHeader>
             <CardContent>
