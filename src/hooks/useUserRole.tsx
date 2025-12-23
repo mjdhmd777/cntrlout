@@ -32,12 +32,11 @@ export const useUserRole = (): UseUserRoleReturn => {
     setLoading(true);
 
     try {
-      // Fetch user role
+      // Fetch user roles (may have multiple, prioritize admin)
       const { data: roleData, error: roleError } = await supabase
         .from("user_roles")
         .select("role")
-        .eq("user_id", user.id)
-        .maybeSingle();
+        .eq("user_id", user.id);
 
       if (roleError) {
         console.error("Error fetching role:", roleError);
@@ -45,8 +44,17 @@ export const useUserRole = (): UseUserRoleReturn => {
         return;
       }
 
-      if (roleData) {
-        const userRole = roleData.role as AppRole;
+      // Prioritize admin role if user has multiple roles
+      const roles = roleData?.map(r => r.role) || [];
+      const userRole: AppRole = roles.includes("admin") 
+        ? "admin" 
+        : roles.includes("freelancer") 
+          ? "freelancer" 
+          : roles.includes("client") 
+            ? "client" 
+            : null;
+
+      if (userRole) {
         setRole(userRole);
 
         // Admin users are always approved with full access
