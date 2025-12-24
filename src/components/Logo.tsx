@@ -21,7 +21,7 @@ const Logo = ({ className = "", showText = true, size = "md" }: LogoProps) => {
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <img src={logoImage} alt="CnTrL Out logo" className={sizeClasses[size]} />
+      <img src={logoImage} alt="CnTrL Out logo" className={`${sizeClasses[size]} object-contain`} />
       {showText && (
         <span className={`font-semibold tracking-tight text-foreground ${textSizes[size]}`}>
           CnTrL Out
