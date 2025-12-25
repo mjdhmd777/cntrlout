@@ -107,6 +107,13 @@ const Auth = () => {
             
             if (assignError) {
               console.error("Error assigning role:", assignError);
+              toast({
+                title: "Setup issue",
+                description: "There was an issue setting up your account. Please try again.",
+                variant: "destructive",
+              });
+              setLoading(false);
+              return;
             }
           }
 
