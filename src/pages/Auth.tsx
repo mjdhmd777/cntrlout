@@ -98,25 +98,15 @@ const Auth = () => {
           const { data: { session } } = await supabase.auth.getSession();
           
           if (session?.user) {
-            // Create user role
-            const { error: roleError } = await supabase.from("user_roles").insert({
-              user_id: session.user.id,
-              role: role,
+            // Use the secure database function to assign role and create profile
+            const { error: assignError } = await supabase.rpc("assign_user_role", {
+              _user_id: session.user.id,
+              _role: role,
+              _email: email,
             });
             
-            if (roleError) {
-              console.error("Error creating role:", roleError);
-            }
-
-            // Create profile
-            const { error: profileError } = await supabase.from("profiles").insert({
-              user_id: session.user.id,
-              full_name: "",
-              email: email,
-            });
-            
-            if (profileError) {
-              console.error("Error creating profile:", profileError);
+            if (assignError) {
+              console.error("Error assigning role:", assignError);
             }
           }
 
